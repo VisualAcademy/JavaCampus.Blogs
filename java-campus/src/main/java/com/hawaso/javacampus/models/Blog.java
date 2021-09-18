@@ -1,10 +1,13 @@
 package com.hawaso.javacampus.models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Nationalized;
 
@@ -19,8 +22,19 @@ public class Blog {
     @Nationalized
     private String name;
 
+    @OneToMany(mappedBy = "blog")
+    private List<Post> posts; // 하나의 Blog에는 여러 Post가 올 수 있음
+
     public Integer getId() {
         return id;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     public String getName() {
